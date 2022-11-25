@@ -1,0 +1,117 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert Checkbox values in Database using Python Flask Jquery Ajax and MySQLdb</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Hello Welcome to R&S Apps</h2>
+    <h3>Looks like your work scope for today is Street Base</h3>
+    <h4>Please choose the items that you need for today and press submit</h4>
+    <h5>Heavy Equipment</h5>
+    <label><input type="checkbox" class="get_value" value="Backhoe"> 420-F-Catepillar Backhoe-42Gal Fuel</label>
+    <br/>
+    <label> <input type="checkbox" class="get_value" value="Bucket"> BUCKET-HD, 36 inch 12.2 CFT PL</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Hammer"> H80E HAMMER</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Bracket"> BRACKET MOUNTING (QC)-PIN LOCK</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Mini"> 305-Mini-Excavator-07A CR MHE CFG14A-14-16.6 Gal Fuel</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Bucket2"> 36 HD Bucket</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Bucket3"> 24 HD Bucket</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Hammer"> Eiroc-SBU 340 hammer</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Turtle"> 22 inch Diesel Vibratory Plate-28W/Wings-BOMAG Model-BPR7070-D-E</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="F-650-1"> 1-Class-C-Ford-F-650</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="F-650-2"> 2-Class-C-Ford-F-650</label>
+    <br/>
+    <h6>Materials</h6>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="704CC"> 704CC-Concrete Mix</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Large keyway"> Large Plastic Keyway</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="G-5 Box"> G-5 Traffic Box</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Backfill"> 3-5 Tons of Backfill sand or AB</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Cutback"> 2-3 tons of cutback</label>
+    <br/>
+    <h6>Small Hand Tools</h6>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Come Along"> Come Along Concrete Rake</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Shovels"> Shovels</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="5g-gas can"> 5 Gallon Gas can with Gas</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Waterhose"> 100 feet 3/4inch water hose</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Watermeter"> CCSF Water Meter</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Watersprayer"> Chapin-3-1/2 gal-Industrial-open hand water sprayer</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Stringline">Survey Stringline</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="5g-gas can"> 5 Gallon Gas can with Gas</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="cords-50ft"> 12 gauge-50' extension cords-2ea</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="cords-100ft"> 12 gauge-100' extension cords-2ea</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="vibrator head"> 1-1/2inchx14inch vibrator head</label>
+    <br/>
+    <h6>Safety Materials</h6>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Glasses"> Glasses</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Gloves"> Gloves</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Earplugs"> Earplugs</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Masks"> Masks</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Water"> Water</label>
+    <br/>
+    <h6>Power Tools</h6>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Generator"> Honda EB5000X Portable Generator</label>
+    <br/>
+    <label><input type="checkbox" class="get_value" value="Vibrator"> 3.2oz-Oztec-Vibrator</label>
+    <br/>
+    <button type="button" name="submit" id="submit">Save</button>
+    <br/>
+    <h4 id="result"></h4>
+    <script>
+        $(document).ready(function() {
+            $('#submit').click(function() {
+                var insert = [];
+                $('.get_value').each(function() {
+                    if ($(this).is(":checked")) {
+                        insert.push($(this).val());
+                    }
+                });
+                insert = insert.toString();         
+                var insert_string = 'checkboxvalue='+insert;            
+                $.ajax({
+                    method: "POST",
+                    url: "/insert",
+                    data: insert_string,
+                    cache: false,
+                    success: function(data){    
+                        $("#result").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
